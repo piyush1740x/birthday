@@ -11,8 +11,8 @@ export default function CountdownPage() {
   const [audio, setAudio] = useState(null);
 
   useEffect(() => {
-    const tickSound = new Audio("/sounds/tiktik.mp3");
-    const backgroundMusic = new Audio("/sounds/background-music.mp3");
+    const tickSound = new Audio("");
+    const backgroundMusic = new Audio("/sounds/tiktik.mp3");
     backgroundMusic.loop = true;
     setAudio(backgroundMusic);
 
@@ -53,9 +53,15 @@ export default function CountdownPage() {
 
   return (
     <div className="min-h-screen bg-pink-100 flex flex-col items-center justify-center p-4 relative">
-      <h1 className="text-3xl font-bold text-gray-800">Your Surprise Unlocks on 22nd Feb 🎉</h1>
+       <button
+        onClick={toggleMusic}
+        className="absolute top-20 px-4 py-2 bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600"
+      >
+        {isPlaying ? "Pause🎵" : "Sound 🎶"}
+      </button>
+      <h1 className="text-3xl text-center font-bold text-pink-600">Your Surprise Unlocks on 22nd Feb 🎉</h1>
       {timeLeft > 0 ? (
-        <p className="text-2xl font-semibold mt-4 bg-white p-4 rounded-lg shadow-md">
+        <p className="text-2xl text-zinc-600 font-semibold mt-4 bg-white p-4 rounded-lg shadow-md">
           {formatTime(timeLeft)}
         </p>
       ) : (
@@ -67,13 +73,7 @@ export default function CountdownPage() {
         </button>
       )}
       
-      {/* Music Toggle Button */}
-      <button
-        onClick={toggleMusic}
-        className="absolute bottom-10 px-4 py-2 bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600"
-      >
-        {isPlaying ? "Pause Music 🎵" : "Play Music 🎶"}
-      </button>
+     
     </div>
   );
 }
